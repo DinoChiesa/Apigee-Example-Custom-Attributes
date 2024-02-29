@@ -46,7 +46,8 @@ the app, and sends those credentials along with API requests.
 
   > As an alternative to allowing a developer to provision his or her own
   > credentials via the Developer portal, an administrator can provision credentials
-  > via the Administrative UI or API.
+  > via the Administrative UI or API. The administrator would need to then
+  > distribute these credentials to the developer in some way.
 
 When the API request reaches Apigee, the API proxy that handles it must invoke a
 policy to verify the credentials - either
@@ -71,19 +72,19 @@ developers, apps, API Products, or even operations within ApI Products.
 
 You can use Custom Attributes to attach information to a product, or app (etc)
 that can later be used during API proxy execution, in the handling of the API
-call.  Some uses of custom attributes are: 
+call.  Some uses of custom attributes are:
 
 - routing information for calls, based on the app
 - a list of data properties to include or exclude from the upstream response
 - a set of defaults to apply to requests
 - a billing or tracking ID for use in upstream log systems
 
-And many others. 
+And many others.
 
 In Apigee, custom attributes are available at runtime after verifying
 credentials on the inbound API request.
 
-This proxy shows how that works. 
+This proxy shows how that works.
 
 ## Implementation in the API Proxy
 
