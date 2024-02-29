@@ -1,0 +1,21 @@
+<AssignMessage name='AM-Response-for-Token'>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <Set>
+    <Payload contentType='application/json'>{
+  "status" : "OK",
+  "request.header.token" : "{request.header.token}",
+  "token.expires_in" : {expires_in},
+  "system.timestamp" : "{system.timestamp}",
+  "developer.app.name" : "{developer.app.name}",
+  "developer.app.id" : "{developer.app.id}",
+  "apiproduct.name" : "{apiproduct.name}",
+  "custom-attr-on-product" : "{apiproduct.custom-attr-on-product}",
+  "custom-attr-on-app" : "{app.custom-attr-on-app}",
+  "custom-attr-on-operation" : "{apiproduct.operation.attributes.custom-attr-on-operation}"
+}
+</Payload>
+    <StatusCode>200</StatusCode>
+    <ReasonPhrase>OK</ReasonPhrase>
+  </Set>
+
+</AssignMessage>

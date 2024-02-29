@@ -1,0 +1,7 @@
+<AssignMessage name='AM-Inject-Fault-Name'>
+  <Set>
+    <Headers>
+      <Header name='apigee-fault-name'>{fault.name}</Header>
+    </Headers>
+  </Set>
+</AssignMessage>

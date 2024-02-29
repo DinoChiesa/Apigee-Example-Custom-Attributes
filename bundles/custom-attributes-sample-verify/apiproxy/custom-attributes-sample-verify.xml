@@ -1,0 +1,6 @@
+<APIProxy revision='1' name='custom-attributes-sample-verify'>
+  <ConfigurationVersion minorVersion='0' majorVersion='4'/>
+  <CreatedAt>1399389135604</CreatedAt>
+  <CreatedBy>dino</CreatedBy>
+  <Description>a proxy used for demonstrating verifying credentials (an API key or token) and implicitly retrieving custom attributes that have been set on the API Product.</Description>
+</APIProxy>

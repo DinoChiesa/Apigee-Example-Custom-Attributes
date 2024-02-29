@@ -1,0 +1,20 @@
+<AssignMessage name='AM-Response-for-Apikey'>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <Set>
+    <Payload contentType='application/json'>{
+  "status" : "OK",
+  "request.header.apikey" : "{request.header.apikey}",
+  "system.timestamp" : "{system.timestamp}",
+  "developer.app.name" : "{developer.app.name}",
+  "developer.app.id" : "{developer.app.id}",
+  "apiproduct.name" : "{apiproduct.name}",
+  "custom-attr-on-product" : "{verifyapikey.VerifyApiKey-1.apiproduct.custom-attr-on-product}",
+  "custom-attr-on-app" : "{verifyapikey.VerifyApiKey-1.app.custom-attr-on-app}",
+  "custom-attr-on-operation" : "{verifyapikey.VerifyApiKey-1.apiproduct.operation.attributes.custom-attr-on-operation}"
+}
+</Payload>
+    <StatusCode>200</StatusCode>
+    <ReasonPhrase>OK</ReasonPhrase>
+  </Set>
+
+</AssignMessage>

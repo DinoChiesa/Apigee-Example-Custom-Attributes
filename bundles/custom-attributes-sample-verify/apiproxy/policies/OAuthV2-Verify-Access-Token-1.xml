@@ -1,0 +1,31 @@
+<OAuthV2 name='OAuthV2-Verify-Access-Token-1'>
+  <Operation>VerifyAccessToken</Operation>
+
+  <!--
+      The AccessToken element is Optional.  By default, this policy finds the
+      token in the Authorization header as per the OAuthV2.0 specification, IETF
+      RFC 6749.
+
+  -->
+  <AccessToken>request.header.token</AccessToken>
+
+
+  <!--
+      This policy sets the following flow variables:
+      organization_name
+      developer.id
+      developer.app.name
+      client_id
+      grant_type
+      token_type
+      access_token
+      accesstoken.{custom_attribute}
+      issued_at
+      expires_in
+      status
+      scope
+      apiproduct.name*
+      apiproduct.{custom_attribute_name}*
+      app.{custom-attribute-name}*
+  -->
+</OAuthV2>

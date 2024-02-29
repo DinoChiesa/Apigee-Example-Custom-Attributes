@@ -1,0 +1,97 @@
+<ProxyEndpoint name="endpoint1">
+
+  <HTTPProxyConnection>
+    <BasePath>/custom-attributes-sample-verify</BasePath>
+    <Properties/>
+  </HTTPProxyConnection>
+
+  <FaultRules/>
+
+
+  <DefaultFaultRule>
+    <AlwaysEnforce>true</AlwaysEnforce>
+    <Step>
+      <Name>AM-Inject-Proxy-Revision-Header</Name>
+    </Step>
+    <Step>
+      <Name>AM-Inject-Fault-Name</Name>
+      <Condition>fault.name != null</Condition>
+    </Step>
+  </DefaultFaultRule>
+
+  <PreFlow name="PreFlow">
+    <Response>
+      <Step>
+        <Name>AM-Clean-Request-Headers-From-Response</Name>
+      </Step>
+    </Response>
+  </PreFlow>
+
+  <PostFlow name="PostFlow">
+    <Response>
+      <Step>
+        <Name>AM-Inject-Proxy-Revision-Header</Name>
+      </Step>
+    </Response>
+  </PostFlow>
+
+  <Flows>
+    <Flow name="flow1">
+      <!--
+          curl -i $apigee/custom-attributes-sample-verify/apikey -H apikey:$apikey
+       -->
+      <Description>flow for verifying an API key</Description>
+      <Request>
+        <Step>
+          <Name>VerifyApiKey-1</Name>
+        </Step>
+      </Request>
+      <Response>
+        <Step>
+          <Name>AM-Response-for-Apikey</Name>
+        </Step>
+      </Response>
+
+      <Condition>(proxy.pathsuffix MatchesPath "/apikey") and (request.verb = "GET")</Condition>
+    </Flow>
+
+    <Flow name="token-verification">
+      <!--
+          curl -i -X POST -H 'content-type: application/x-www-form-urlencoded' \
+            -u ${CLIENT_ID}:${CLIENT_SECRET} \
+            "$apigee/custom-attributes-sample-oauth2/token" \
+            -d 'grant_type=client_credentials'
+
+            access_token=dkjdkjdkjd
+
+          curl -i $apigee/custom-attributes-sample-verify/token -H token:$access_token
+       -->
+      <Description>flow for verifying an OAuth2 access token</Description>
+      <Request>
+        <Step>
+          <Name>OAuthV2-Verify-Access-Token-1</Name>
+        </Step>
+      </Request>
+      <Response>
+        <Step>
+          <Name>AM-Response-for-Token</Name>
+        </Step>
+      </Response>
+
+      <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "GET")</Condition>
+    </Flow>
+
+    <Flow name="unknown request">
+      <Request>
+        <Step>
+          <Name>RF-Unknown-Request</Name>
+        </Step>
+      </Request>
+      <Response/>
+    </Flow>
+
+  </Flows>
+
+  <RouteRule name="NoRoute"/>
+
+</ProxyEndpoint>

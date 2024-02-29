@@ -1,0 +1,24 @@
+{
+  "operationConfigs": [
+    {
+      "apiSource": "custom-attributes-sample-verify",
+      "operations": [
+        {
+          "resource": "/**",
+          "methods": [
+            "GET",
+            "POST",
+            "DELETE"
+          ]
+        }
+      ],
+      "attributes": [
+        {
+          "name": "custom-attr-on-operation",
+          "value": "123"
+        }
+      ]
+    }
+  ],
+  "operationConfigType": "proxy"
+}

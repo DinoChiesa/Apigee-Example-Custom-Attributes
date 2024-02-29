@@ -1,0 +1,6 @@
+<APIProxy revision='1' name='custom-attributes-sample-oauth2'>
+  <ConfigurationVersion minorVersion='0' majorVersion='4'/>
+  <CreatedAt>1458959730864</CreatedAt>
+  <CreatedBy>dino</CreatedBy>
+  <Description>Dispense OAuth v2.0 Bearer tokens for client_credentials grant type.</Description>
+</APIProxy>
