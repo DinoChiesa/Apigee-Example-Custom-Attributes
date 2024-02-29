@@ -39,7 +39,7 @@ REST-ful Verb + Path combinations to support the use cases:
 Configuring the set of API Products with the various operations is one step in
 configuring access to APIs. The next step is to grant access to these products
 to one or more applications - this is done via app credentials. In Apigee, you
-need to configure an App authorized for a product, to get a set of credentials.
+need to configure an App as authorized for a product, to get a set of credentials.
 This is typically done in the self-service developer portal (aka API
 Catalog). After obtaining credentials, the developer embeds the credentials into
 the app, and sends those credentials along with API requests.
@@ -56,14 +56,16 @@ or
 [OAuthV2/VerifyAccessToken](https://cloud.google.com/apigee/docs/api-platform/reference/policies/oauthv2-policy#verifyaccesstoken). When
 that happens, Apigee checks the credential and maps it to one or more API
 Products. (In the simple case, an app is authorized for a single API Product,
-but Apigee allows apps to have access to more than one product via a single credential.)  Then, Apigee
-checks that the current executing operation - using the REST model, this is a
-verb+path combination - is included within one of the API Products that is
-authorized for that credential. If not, then the request is rejected.
+but Apigee allows apps to have access to more than one product via a single
+credential.)  Then, Apigee checks that the current executing operation - using
+the REST model, this is a verb+path combination - is included within one of the
+API Products that is authorized for that credential. If not, then the request is
+rejected.
 
-In our example, for a `GET /contracts` request, the credential must be authorized
-for the viewer or admin product. For a `POST /contracts` request, the credential
-must be authorized for either creator or admin.
+Continuing the example from above, for a `GET /contracts` request, the
+credential must be authorized for a product that allows that operation on the
+given API Proxy. If not, the credential verification policy - VerifyAPIKey or
+VerifyAccessToken - will throw a fault and return an error.
 
 ## What Are Custom Attributes?
 
@@ -71,8 +73,9 @@ Custom Attributes are simply extra data associated to Apigee entities - like
 developers, apps, API Products, or even operations within ApI Products.
 
 You can use Custom Attributes to attach information to a product, or app (etc)
-that can later be used during API proxy execution, in the handling of the API
-call.  Some uses of custom attributes are:
+that can later be used during API proxy execution, after successful verification
+of credentials, in the further handling of the API request.  Some uses of custom
+attributes are:
 
 - routing information for calls, based on the app
 - a list of data properties to include or exclude from the upstream response
@@ -81,7 +84,7 @@ call.  Some uses of custom attributes are:
 
 And many others.
 
-In Apigee, custom attributes are available at runtime after verifying
+In Apigee, custom attributes are available as context variables at runtime after verifying
 credentials on the inbound API request.
 
 This proxy shows how that works.
